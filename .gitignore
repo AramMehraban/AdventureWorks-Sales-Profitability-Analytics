@@ -1,0 +1,119 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environment
+# =========================
+venv/
+.venv/
+env/
+.env
+.env.*
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# VS Code / IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Visual Studio / SQL Project
+# =========================
+.vs/
+sql/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# =========================
+# Operating System Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Python Build Files
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Temporary Files
+# =========================
+temp/
+tmp/
+*.swp
+*.swo
+
+# =========================
+# Data Files
+# Keep datasets if they are small enough
+# Uncomment if datasets become too large
+# =========================
+# data/raw/
+# data/processed/
+
+# =========================
+# Power BI
+# =========================
+*.pbix.lock
+
+# =========================
+# SQL Server Database Files
+# =========================
+*.bak
+*.mdf
+*.ldf
+
+# =========================
+# Reports / Generated Files
+# =========================
+reports/charts/*.png
+reports/*.pdf
+
+# Keep folders even if empty
+!reports/charts/.gitkeep
+
+# =========================
+# Excel Temporary Files
+# =========================
+~$*.xlsx
+
+# =========================
+# Testing / Coverage
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# MyPy
+# =========================
+.mypy_cache/
+
+# =========================
+# Ruff / Linter
+# =========================
+.ruff_cache/
+
+# =========================
+# Personal / Private Notes
+# =========================
+AdevnturWorksDW_Docs.txt
