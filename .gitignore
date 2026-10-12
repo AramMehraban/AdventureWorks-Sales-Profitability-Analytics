@@ -87,6 +87,9 @@ tmp/
 # =========================
 reports/charts/*.png
 reports/*.pdf
+reports/*.odt
+report/business_reports.odt
+
 
 # Keep folders even if empty
 !reports/charts/.gitkeep
@@ -117,3 +120,4 @@ htmlcov/
 # Personal / Private Notes
 # =========================
 AdevnturWorksDW_Docs.txt
+

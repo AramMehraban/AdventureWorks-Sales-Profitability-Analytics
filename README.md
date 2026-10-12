@@ -1,543 +1,438 @@
 # AdventureWorks Sales & Profitability Analytics
 
-## Overview
+An end-to-end **Business Intelligence and Data Analytics portfolio project** using Microsoft SQL Server, Python, Excel, and Power BI.
 
-This project presents a complete end-to-end **Business Intelligence and Data Analytics workflow** using the AdventureWorksDW2025 database.
+This project demonstrates a complete analytics workflow, from extracting transactional data and validating data quality to engineering analytical features, generating business reports, building interactive dashboards, and communicating actionable business insights.
 
-The project analyzes sales performance, customer behavior, product performance, profitability, and business trends using **SQL Server, Python, Excel, and Power BI**.
+The analysis focuses on sales performance, profitability, product categories, customer behavior, geographical performance, and management reporting.
 
-The goal is to demonstrate a realistic analytics workflow from raw database data to validated business insights and an interactive Power BI dashboard.
+## Project Highlights
 
-### Project Workflow
+- End-to-end analytics pipeline using SQL Server and Python
+- Data cleaning, validation, and feature engineering
+- Exploratory data analysis and business KPI calculation
+- Automated chart generation and Excel reporting
+- Interactive Power BI dashboard with five business pages
+- DAX measures, date modeling, and time intelligence
+- Customer revenue concentration and product performance segmentation
+- Cross-checking of core Power BI KPIs against validated analytical results
 
-```text
-SQL Server AdventureWorksDW2025
-            ↓
-     Data Extraction
-            ↓
-       Data Cleaning
-            ↓
-    Feature Engineering
-            ↓
-   Python Data Analysis
-            ↓
-    SQL / Excel / Power BI
-            ↓
-     Business Insights
-            ↓
-         GitHub
-```
+## Dashboard
 
----
+The Power BI report contains five main business pages and a dedicated internal QA page.
 
-# Tech Stack
+| Dashboard page | Business purpose |
+|---|---|
+| **Executive Overview** | Executive KPIs, sales and profit trends, orders, customers, and average order value |
+| **Sales Performance** | Sales trends, country performance, product categories, and year-over-year growth |
+| **Customer Intelligence** | Customer revenue, order frequency, profitability, and revenue concentration |
+| **Product & Profitability** | Product rankings, category performance, margins, and product performance segments |
+| **Management Insights** | Business findings, revenue drivers, profitability, and management recommendations |
+| **QA** | Internal KPI, data quality, and profit validation checks |
 
-* SQL Server
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-* Jupyter Notebook
-* Power BI
-* DAX
-* Power Query
-* Excel
-* SQLAlchemy
-* PyODBC
-* Git / GitHub
+**Power BI report:** Open the local report at `powerbi/AdventureworksDashboard.pbix`. A published report link can be added here after deployment.
 
----
+## Technology Stack
 
-# Data Source
+| Area | Technologies |
+|---|---|
+| Database | Microsoft SQL Server |
+| Querying | SQL, joins, analytical queries, database views |
+| Data processing | Python, Pandas, NumPy |
+| Visualization | Matplotlib, Seaborn |
+| Business Intelligence | Power BI, DAX, Power Query |
+| Reporting | Microsoft Excel, OpenPyXL, XlsxWriter |
+| Database connectivity | SQLAlchemy, pyodbc |
+| Development | Jupyter Notebook, VS Code, Git, GitHub |
 
-The project uses the **AdventureWorksDW2025** data warehouse.
+## Data Source
 
-### Main Tables
+The project uses the **AdventureWorksDW2025** sample data warehouse.
 
-* `FactInternetSales`
-* `DimCustomer`
-* `DimProduct`
-* `DimProductCategory`
-* `DimProductSubcategory`
-* `DimGeography`
+The extraction query combines data from:
 
-The final analytical dataset combines sales transactions with product, customer, geography, and product-category information.
+- `FactInternetSales`
+- `DimProduct`
+- `DimProductSubcategory`
+- `DimProductCategory`
+- `DimCustomer`
+- `DimGeography`
 
----
+The resulting analytical dataset contains sales transactions enriched with product, customer, product-category, and geographical attributes.
 
-# Data Pipeline
+This is a sample-data portfolio project, not a live reporting system for an operational business.
 
-## 1. Data Extraction
-
-Sales data was extracted from SQL Server using SQL queries and Python.
-
-The extraction layer combines information from the following tables:
+## End-to-End Data Pipeline
 
 ```text
-FactInternetSales
-        +
-DimProduct
-        +
-DimProductSubcategory
-        +
-DimProductCategory
-        +
-DimCustomer
-        +
-DimGeography
+SQL Server: AdventureWorksDW2025
+                 |
+                 v
+          Data Extraction
+                 |
+                 v
+       data/raw/sales_data.csv
+                 |
+                 v
+       Data Cleaning & QA
+                 |
+                 v
+     sales_clean.csv (12 columns)
+                 |
+                 v
+        Feature Engineering
+                 |
+                 v
+   sales_featured.csv (17 columns)
+                 |
+          +------+------+
+          |             |
+          v             v
+   Python Analysis   Power BI
+          |             |
+          v             v
+  Charts & Insights  Interactive
+          |          Dashboard
+          v
+   Excel Reporting
+          |
+          v
+  Business Recommendations
 ```
 
-The resulting dataset is exported to:
+## Dataset Overview
 
-```text
-data/raw/sales_data.csv
-```
+The final extracted dataset contains **60,398 sales records**.
 
-### Extracted Dataset
+| Dataset metric | Result |
+|---|---:|
+| Sales records | 60,398 |
+| Source columns | 12 |
+| Feature-engineered columns | 17 |
+| Unique orders | 27,659 |
+| Unique customers | 18,484 |
+| Unique products | 130 |
+| Countries represented | 6 |
+| Order date range | 2010-12-29 to 2014-01-28 |
 
-* 60,398 sales records
-* 27,659 unique orders
-* 18,484 unique customers
-* 12 source columns
+**Important distinction:** Sales records represent individual dataset rows. They are not the same as unique orders.
 
----
+## Data Extraction
 
-# 2. Data Cleaning
+Sales data is extracted from SQL Server using SQL queries and Python.
 
-The extracted data was validated and cleaned using Python.
+The extraction script:
+
+- Connects to the configured SQL Server database
+- Joins sales with product, customer, category, and geography information
+- Calculates profit from sales and product cost
+- Validates the extracted dataset
+- Exports the raw analytical dataset
+
+Output:
+
+`data/raw/sales_data.csv`
+
+Main script:
+
+`scripts/01_data_extraction.py`
+
+## Data Cleaning and Validation
+
+Python is used to validate data types, dates, identifiers, sales values, costs, profits, and duplicate rows.
 
 The cleaning process includes:
 
-* Data type validation
-* Date validation
-* Missing-value checks
-* Duplicate-row checks
-* Sales amount validation
-* Cost validation
-* Profit validation
-* Sales order validation
-* Customer validation
-* Profit calculation validation
-
-The cleaned dataset is stored in:
-
-```text
-data/processed/sales_clean.csv
-```
+- Data type validation
+- Invalid-date checks
+- Missing-value checks
+- Duplicate-row checks
+- Sales order and customer identifier validation
+- Sales, cost, and profit validation
+- Profit calculation consistency checks
+- Validation of negative values against the project's business rules
 
 ### Data Quality Results
 
-```text
-Rows                  60,398
-Columns               12
-Missing Values        0
-Duplicate Rows        0
-Invalid Dates         0
-Missing Order IDs     0
-Missing Customer IDs  0
-Negative Sales        0
-Negative Cost         0
-Negative Profit       0
-Profit Validation     PASS
-```
+| Check | Result |
+|---|---:|
+| Rows after cleaning | 60,398 |
+| Columns | 12 |
+| Missing values | 0 |
+| Duplicate rows | 0 |
+| Invalid dates | 0 |
+| Missing order numbers | 0 |
+| Missing customer keys | 0 |
+| Negative sales amounts | 0 |
+| Negative product costs | 0 |
+| Negative profit values | 0 |
+| Profit calculation validation | PASS |
 
----
+Profit is validated using:
 
-# 3. Feature Engineering
+`Profit = SalesAmount - TotalProductCost`
 
-Additional analytical features were created to support time-series analysis and profitability analysis.
+Output:
 
-### Features
+`data/processed/sales_clean.csv`
 
-* `OrderYear`
-* `OrderMonthNumber`
-* `OrderMonth`
-* `OrderYearMonth`
-* `ProfitMargin`
+Main script:
 
-The final analytical dataset contains:
+`scripts/02_data_cleaning.py`
 
-```text
-60,398 rows
-17 columns
-```
+## Feature Engineering
 
-Saved to:
+The feature-engineering stage adds fields for time-based analysis and profitability reporting.
 
-```text
-data/processed/sales_featured.csv
-```
+| Feature | Purpose |
+|---|---|
+| `OrderYear` | Annual analysis |
+| `OrderMonthNumber` | Correct chronological month sorting |
+| `OrderMonth` | Month-level reporting |
+| `OrderYearMonth` | Monthly trend analysis |
+| `ProfitMargin` | Record-level profitability analysis |
 
----
+The final feature-engineered dataset contains **60,398 rows and 17 columns**.
 
-# Business Questions
+Output:
 
-The project answers the following business questions:
+`data/processed/sales_featured.csv`
 
-1. How much total revenue and profit were generated?
+Main script:
+
+`scripts/03_feature_engineering.py`
+
+## Business Questions
+
+The analysis addresses the following questions:
+
+1. What are the total sales, costs, and profit?
 2. How do sales and profit change over time?
 3. Which countries generate the highest sales?
 4. Which product categories drive revenue?
 5. Which products generate the highest sales and profit?
 6. Which customers contribute the most revenue?
-7. How concentrated is customer revenue?
+7. How concentrated is revenue among high-value customers?
 8. Which product categories have the highest profit margins?
 9. How does sales performance change year over year?
-10. Which business areas require management attention?
+10. Which products and business areas deserve management attention?
 
----
+## Key Business KPIs
 
-# Key Business KPIs
+The following values were validated during the project.
 
-The final validated results are:
+| KPI | Validated result |
+|---|---:|
+| Total Sales | 29,358,677.22 |
+| Total Cost | 17,277,793.58 |
+| Total Profit | 12,080,883.65 |
+| Profit Margin | 41.15% |
+| Sales Records | 60,398 |
+| Unique Orders | 27,659 |
+| Unique Customers | 18,484 |
+| Unique Products | 130 |
+| Average Order Value | 1,061.45 |
+| Average Sales per Record | 486.09 |
 
-| KPI                      |         Value |
-| ------------------------ | ------------: |
-| Total Sales              | 29,358,677.22 |
-| Total Cost               | 17,277,793.58 |
-| Total Profit             | 12,080,883.65 |
-| Profit Margin            |        41.15% |
-| Sales Records            |        60,398 |
-| Unique Orders            |        27,659 |
-| Unique Customers         |        18,484 |
-| Unique Products          |           130 |
-| Average Order Value      |      1,061.45 |
-| Average Sales per Record |        486.09 |
+*Currency note: The report preserves the monetary values from the source dataset's numeric fields. No currency conversion has been performed, so no EUR or USD conversion is claimed.*
 
-> Note: The project does not perform currency conversion. Monetary values are reported in the source dataset's original currency context.
+## Business Analysis and Findings
 
----
+### 1. Sales Performance
 
-# Business Analysis
+The dataset contains approximately 29.36 million in total sales and 12.08 million in total profit, with an overall profit margin of 41.15%.
 
-## Sales Performance
+Sales and profitability are analyzed by year, month, country, and product category.
 
-Total sales reached approximately:
+### 2. Product Category Performance
 
-```text
-29.36M
-```
+The three main product categories are:
 
-Total profit reached approximately:
+- Bikes
+- Accessories
+- Clothing
 
-```text
-12.08M
-```
+Key findings:
 
-with an overall profit margin of:
+- **Bikes** are the dominant revenue category, with approximately 28.32 million in sales.
+- Bikes account for approximately 96.46% of total sales.
+- **Accessories** achieve the highest category profit margin at approximately 62.60%.
+- Bikes have a profit margin of approximately 40.63%.
+- Clothing has a profit margin of approximately 40.15%.
 
-```text
-41.15%
-```
+These results indicate that Bikes are the main revenue driver, while Accessories represent an important high-margin category.
 
-Sales performance is analyzed by year, month, country, and product category.
+### 3. Customer Intelligence
 
----
+Customer analysis covers:
 
-## Product Category Performance
+- Customer revenue
+- Order frequency
+- Customer profitability
+- Top customers by sales
+- Revenue concentration among the top 10, 50, 100, and 500 customers
 
-Three main product categories are represented:
+The analysis supports the identification of high-value customer groups and highlights the importance of monitoring revenue concentration.
 
-* Bikes
-* Accessories
-* Clothing
+### 4. Product Performance Segmentation
 
-### Key findings
+The product analysis classifies products into four performance segments:
 
-* **Bikes** are the dominant revenue category and generate the vast majority of total sales.
-* **Accessories** achieve the highest profit margin at approximately **62.6%**.
-* Bikes generate the largest absolute profit because of their much higher sales volume.
-* Clothing contributes a smaller share of total revenue.
+- `Star`
+- `Review`
+- `Growth Opportunity`
+- `Low Priority`
 
-This indicates that Bikes are critical for revenue generation, while Accessories provide an important high-margin opportunity.
+The segmentation compares product sales performance with product profit margin, helping distinguish strong performers from products that may require further review.
 
----
+These segments are analytical categories, not independently verified business decisions.
 
-# Customer Analysis
+### 5. Management Recommendations
 
-Customer analysis focuses on:
-
-* Customer revenue
-* Customer order frequency
-* Customer profitability
-* Customer concentration
-* Top customers by sales
-
-The project contains:
-
-```text
-18,484 unique customers
-```
-
-A relatively small group of high-value customers contributes a significant share of total revenue.
-
-This makes customer retention and revenue concentration important management considerations.
-
----
-
-# Product Analysis
-
-Product performance is analyzed using:
-
-* Total Sales
-* Total Profit
-* Profit Margin
-* Product Category
-* Performance Segment
-
-Products are classified into four analytical segments:
-
-```text
-Star
-Review
-Growth Opportunity
-Low Priority
-```
-
-The segmentation considers both:
-
-* Product sales performance
-* Product profit margin
-
-This helps identify products that are strong revenue and profitability performers as well as products that may require further review.
-
----
-
-# Time Intelligence
-
-Power BI time intelligence was implemented using a dedicated `DimDate` table.
-
-The model supports:
-
-* Year
-* Month
-* Quarter
-* Year-Month
-* YTD Sales
-* YTD Profit
-* Previous Year Sales
-* Previous Year Profit
-* Year-over-Year Sales Growth
-* Rolling 12-Month Sales
-* Rolling 12-Month Profit
-
-### Year-over-Year Analysis
-
-Because the source data starts in late 2010 and ends in early 2014, only comparable complete-year periods are used for the main YoY comparison.
-
-Validated results include:
-
-```text
-2012 vs 2011    -17.43%
-2013 vs 2012    179.87%
-```
-
-Incomplete comparison periods are intentionally excluded.
-
----
-
-# Power BI Dashboard
-
-The project includes an interactive Power BI dashboard with five main business pages.
-
-## 1. Overview
-
-Provides an executive summary of:
-
-* Total Sales
-* Total Profit
-* Profit Margin
-* Unique Orders
-* Unique Customers
-* Average Order Value
-* Monthly Sales Trend
-* Monthly Profit Trend
-* Sales by Year
-
----
-
-## 2. Sales
-
-Provides detailed sales-performance analysis including:
-
-* Sales
-* Profit
-* Profit Margin
-* Sales YoY %
-* Sales Trend
-* Sales by Country
-* Sales by Product Category
-* Year-over-Year Sales Growth
-
----
-
-## 3. Customers
-
-Provides customer intelligence including:
-
-* Unique Customers
-* Total Sales
-* Average Order Value
-* Average Sales per Record
-* Customers by Country
-* Top 10 Customers
-* Customer Revenue Concentration
-* Customer Sales vs Order Frequency
-* Customer Sales vs Profit
-* Customer Profitability
-
----
-
-## 4. Products
-
-Provides product and profitability analysis including:
-
-* Total Sales
-* Total Profit
-* Profit Margin
-* Number of Products
-* Sales by Product Category
-* Sales & Profit by Product Category
-* Top 10 Products by Sales
-* Top 10 Products by Profit
-* Category Profit Margin
-* Product Performance Analysis
-
----
-
-## 5. Insights
-
-Provides management-oriented business insights and recommendations.
-
-The page summarizes:
-
-* Revenue Drivers
-* Profit Contribution
-* Customer Revenue Concentration
-* Top Products by Profit
-* Management Recommendations
-
-### Main Recommendations
+Based on the analyzed results, the dashboard highlights the following management priorities:
 
 1. Protect the Bikes revenue base.
-2. Expand high-margin Accessories opportunities.
+2. Evaluate opportunities to expand high-margin Accessories.
 3. Monitor customer revenue concentration.
-4. Focus on products with strong sales and profitability.
-5. Use Power BI monitoring to support recurring business decisions.
+4. Maintain availability of high-performing products.
+5. Review product profitability alongside sales volume.
+6. Use consistent KPI monitoring to support recurring business decisions.
 
----
+These recommendations are derived from the sample dataset and should be evaluated against business context before real-world implementation.
 
-# Power BI Navigation
+## Time Intelligence in Power BI
 
-The dashboard uses a page navigator for easy navigation between WITH ARROW TO FORWARD AND BACKWARD PAGE:
+A dedicated `DimDate` table supports date-based analysis.
+
+The model includes:
+
+- Year
+- Month and month number
+- Quarter
+- Year-Month
+- Sales YTD
+- Profit YTD
+- Previous-year sales and profit
+- Year-over-year sales growth
+- Rolling 12-month sales
+- Rolling 12-month profit
+
+### Year-over-Year Validation
+
+The source data starts in late 2010 and ends in early 2014. Therefore, incomplete comparison periods are excluded from the main YoY growth measure.
+
+| Comparison | Sales YoY |
+|---|---:|
+| 2012 vs 2011 | -17.43% |
+| 2013 vs 2012 | 179.87% |
+
+The measure returns blank for excluded periods rather than presenting an incomplete comparison as a full-year result.
+
+## Power BI Data Model
+
+The Power BI report uses the feature-engineered sales dataset and a dedicated date table.
 
 ```text
-EXECUTIVE OVERVIEW | SALES PERFORMANCE | CUSTOMERS INTELLIGENCE | PRODUCTS & PROFITABILITY | MANAGEMENT INSIGHTS
+DimDate
+   |
+   | 1 : *
+   v
+sales_featured
 ```
 
-A dedicated QA page is also included for internal validation.
+The active relationship connects:
 
----
+`DimDate[Date]` → `sales_featured[OrderDate]`
 
-# Data Quality & QA
+Core DAX measures include:
 
-A dedicated QA page was created in Power BI to validate the final analytical model.
+- `Total Sales`
+- `Total Cost`
+- `Total Profit`
+- `Profit Margin %`
+- `Sales Records`
+- `Unique Orders`
+- `Unique Customers`
+- `Average Order Value`
+- `Average Sales per Record`
+- `Sales YTD`
+- `Profit YTD`
+- `Sales YoY %`
+- `Rolling 12M Sales`
+- `Rolling 12M Profit`
+
+## Python Analysis and Visualizations
+
+Python is used for KPI calculation, business analysis, chart generation, and report preparation.
+
+The visualization pipeline generates 12 charts:
+
+- KPI dashboard
+- Yearly sales trend
+- Yearly profit trend
+- Yearly sales versus profit
+- Monthly sales trend
+- Monthly profit trend
+- Profit margin trend
+- Top countries
+- Category sales
+- Category profit margin
+- Top products
+- Top customers
+
+Output directory:
+
+`reports/charts/`
+
+Main scripts:
+
+- `scripts/04_analysis.py`
+- `scripts/05_visualization.py`
+
+## Excel Business Report
+
+The Excel reporting pipeline creates a workbook containing eight analytical sheets:
+
+1. KPI Summary
+2. Yearly Analysis
+3. Monthly Analysis
+4. Country Analysis
+5. Category Analysis
+6. Product Analysis
+7. Customer Analysis
+8. City Analysis
+
+Output:
+
+`reports/AdventureWorks_Analytics_Report.xlsx`
+
+Main script:
+
+`scripts/06_export_excel.py`
+
+## Data Quality and Cross-System Validation
+
+The dedicated Power BI QA page displays the core KPI results and data quality checks.
 
 ### Final QA Results
 
-```text
-Total Sales        29,358,677.22
-Total Cost         17,277,793.58
-Total Profit       12,080,883.65
-Profit Margin      41.15%
-Unique Orders      27,659
-Unique Customers   18,484
-Sales Records      60,398
-Unique Products    130
-Missing Values     0
-Duplicate Rows     0
-Profit Validation  PASS
-```
+| Validation | Result |
+|---|---:|
+| Total Sales | 29,358,677.22 |
+| Total Cost | 17,277,793.58 |
+| Total Profit | 12,080,883.65 |
+| Profit Margin | 41.15% |
+| Unique Orders | 27,659 |
+| Unique Customers | 18,484 |
+| Sales Records | 60,398 |
+| Unique Products | 130 |
+| Missing Values | 0 |
+| Duplicate Rows | 0 |
+| Profit Validation | PASS |
 
-The Power BI results were cross-checked against the established Python/SQL analytical results.
+**Validation status:** Core Power BI KPI values match the established analytical reference values from the Python/SQL workflow.
 
-**Cross-system validation: PASS**
-
----
-
-# Python Analysis
-
-Python was used for:
-
-* Data extraction
-* Data cleaning
-* Feature engineering
-* Exploratory analysis
-* KPI calculation
-* Business analysis
-* Visualization
-* Excel reporting
-
-The main Python scripts are located in:
-
-```text
-scripts/
-```
-
----
-
-# Data Visualizations
-
-The Python visualization pipeline generates charts for:
-
-* KPI Dashboard
-* Yearly Sales Trend
-* Yearly Profit Trend
-* Yearly Sales vs Profit
-* Monthly Sales Trend
-* Monthly Profit Trend
-* Profit Margin Trend
-* Top Countries
-* Category Sales
-* Category Profit Margin
-* Top Products
-* Top Customers
-
-Charts are exported automatically to:
-
-```text
-reports/charts/
-```
-
----
-
-# Excel Business Report
-
-An Excel analytical report is generated automatically using Python.
-
-The report contains the following sheets:
-
-```text
-KPI Summary
-Yearly Analysis
-Monthly Analysis
-Country Analysis
-Category Analysis
-Product Analysis
-Customer Analysis
-City Analysis
-```
-
-Output file:
-
-```text
-reports/AdventureWorks_Analytics_Report.xlsx
-```
-
----
-
-# Project Structure
+## Repository Structure
 
 ```text
 AdventureWorksDW-Analysis_PowerBI_Excel/
@@ -545,7 +440,6 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 ├── data/
 │   ├── raw/
 │   │   └── sales_data.csv
-│   │
 │   └── processed/
 │       ├── sales_clean.csv
 │       └── sales_featured.csv
@@ -564,43 +458,11 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 ├── powerbi/
 │   ├── AdventureworksDashboard.pbix
 │   └── Dashboards_Screenshots/
-│       ├── P1_Executive_Overview.jpg
-│       ├── P2_Sales_Performance.jpg
-│       ├── P3_Customer.jpg
-│       ├── P3_Customer_Mit_Filter.jpg
-│       ├── P4_Product_Profitability.jpg
-│       └── P5_Management_Insights.jpg
 │
 ├── reports/
 │   ├── charts/
-│   │   ├── kpi_dashboard.png
-│   │   ├── monthly_sales_trend.png
-│   │   ├── monthly_profit_trend.png
-│   │   ├── profit_margin_trend.png
-│   │   ├── yearly_sales_trend.png
-│   │   ├── yearly_profit_trend.png
-│   │   ├── yearly_sales_vs_profit.png
-│   │   ├── top_countries.png
-│   │   ├── category_sales.png
-│   │   ├── category_profit_margin.png
-│   │   ├── top_products.png
-│   │   └── top_customers.png
-│   │
 │   ├── screenshots/
-│   │   ├── monthly_sales_trends.png
-│   │   ├── sale_data_table.png
-│   │   ├── sales_data_clreaned_table.png
-│   │   ├── to_10_products.png
-│   │   ├── top_10_countries.png
-│   │   ├── top_10_customers.png
-│   │   ├── total_rowa.png
-│   │   ├── total_sales_and_profit.png
-│   │   ├── total_sales_profit.png
-│   │   ├── vw_contry_sales.png
-│   │   ├── vw_sales_overview.png
-│   │   ├── yearly&monthly_sales_trend.png
-│   │   └── yearly_trend.png
-│   │
+│   ├── analysis/
 │   ├── AdventureWorks_Analytics_Report.xlsx
 │   ├── business_reports.pdf
 │   └── business_reports.odt
@@ -618,69 +480,60 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 │   ├── create_view.sql
 │   └── setup_database.sql
 │
-├── venv/
-│
-├── .env
+├── .env.example
 ├── .gitignore
-├── AdventureWorksDW-Analysis_PowerBI.slnx
 ├── requirements.txt
 └── README.md
 ```
 
----
+*The repository structure above documents the main project components. Keep the directory listing synchronized with the files actually committed to GitHub.*
 
-# How to Run
+## Getting Started
 
-## 1. Clone the Repository
+### Prerequisites
+
+- Python 3.11 or a compatible version
+- Microsoft SQL Server with the AdventureWorksDW2025 database
+- Microsoft ODBC Driver for SQL Server
+- Power BI Desktop
+- Microsoft Excel or a compatible spreadsheet application
+
+### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone <YOUR_GITHUB_REPOSITORY_URL>
 cd AdventureWorksDW-Analysis_PowerBI_Excel
 ```
 
----
+### 2. Create a Virtual Environment
 
-## 2. Create a Virtual Environment
-
-### Windows
+**Windows:**
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-### Mac/Linux
+**macOS / Linux:**
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
----
-
-## 3. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 4. Configure the Database Connection
 
-## 4. Configure SQL Server
+Create a local `.env` file using `.env.example` as a template.
 
-The project expects:
+Example:
 
-```text
-Server: localhost\SQLEXPRESS
-Database: AdventureWorksDW2025
-Driver: ODBC Driver 17 for SQL Server
-```
-
-The database connection is configured through environment variables.
-
-Create a local `.env` file:
-
-```text
+```dotenv
 SERVER=localhost\SQLEXPRESS
 DATABASE=AdventureWorksDW2025
 DRIVER=ODBC Driver 17 for SQL Server
@@ -690,193 +543,101 @@ DB_NAME=AdventureWorksDW2025
 DB_DRIVER=ODBC Driver 17 for SQL Server
 ```
 
-**Important:** Never commit `.env` to GitHub.
+Adjust the connection settings to match your SQL Server installation.
 
----
+**Security:** Never commit `.env`, database credentials, or other secrets to GitHub.
 
-# Run the Analytics Pipeline
+### 5. Run the Analytics Pipeline
 
-Run the scripts in the following order:
-
-### Step 1 — Data Extraction
+Run the scripts from the project root in this order:
 
 ```bash
 python scripts/01_data_extraction.py
-```
-
-### Step 2 — Data Cleaning
-
-```bash
 python scripts/02_data_cleaning.py
-```
-
-### Step 3 — Feature Engineering
-
-```bash
 python scripts/03_feature_engineering.py
-```
-
-### Step 4 — Business Analysis
-
-```bash
 python scripts/04_analysis.py
-```
-
-### Step 5 — Visualization
-
-```bash
 python scripts/05_visualization.py
-```
-
-### Step 6 — Excel Export
-
-```bash
 python scripts/06_export_excel.py
 ```
 
----
+The extraction step requires access to a configured SQL Server instance and the source database.
 
-# Power BI
+### 6. Open the Power BI Report
 
 Open:
 
-```text
-powerbi/AdventureworksDashboard.pbix
-```
+`powerbi/AdventureworksDashboard.pbix`
 
-The Power BI model uses:
+If the repository is moved to another computer, update the Power BI data source path as necessary and refresh the report.
 
-```text
-sales_featured
-        ↓
-DimDate
-```
+## Project Deliverables
 
-The model includes a dedicated date table and time-intelligence measures.
+- SQL extraction and analytical queries
+- Python data extraction and transformation scripts
+- Cleaned and feature-engineered datasets
+- Business analysis and KPI calculations
+- Automated data visualizations
+- Excel reporting workbook
+- Interactive Power BI dashboard
+- Data quality validation and business recommendations
 
----
-
-# Key Business Findings
-
-### 1. Strong Overall Profitability
-
-The project generates approximately:
-
-```text
-29.36M Total Sales
-12.08M Total Profit
-41.15% Profit Margin
-```
-
----
-
-### 2. Bikes Drive Revenue
-
-Bikes represent the dominant product category and are responsible for the vast majority of total sales.
-
-This means overall revenue performance is strongly dependent on the Bikes category.
-
----
-
-### 3. Accessories Have the Highest Margin
-
-Accessories achieve a profit margin of approximately:
-
-```text
-62.6%
-```
-
-This makes Accessories an important potential growth and profitability opportunity.
-
----
-
-### 4. Customer Concentration Matters
-
-A relatively small group of customers contributes a significant share of total revenue.
-
-High-value customers should therefore be monitored carefully to reduce revenue concentration risk.
-
----
-
-### 5. Product Performance Is Uneven
-
-A limited number of products contribute a significant share of total sales and profit.
-
-These products should receive continued attention in:
-
-* Inventory planning
-* Product availability
-* Commercial strategy
-* Profitability management
-
----
-
-# Future Improvements
+## Limitations and Future Improvements
 
 Potential future enhancements include:
 
-* Customer segmentation
-* Sales forecasting
-* Machine learning prediction
-* Customer churn analysis
-* Streamlit analytics application
-* Automated ETL pipelines
-* Power BI Service deployment
-* Microsoft Fabric integration
-* Cloud data warehouse integration
-* Automated dashboard refresh
-* Advanced anomaly detection
-* Advanced DAX and business intelligence features
+- Automated ETL execution and scheduled refresh
+- Automated regression tests for KPI calculations
+- Dedicated customer and product dimension tables
+- Additional drill-through and report tooltip functionality
+- Power BI Service deployment, subject to account and licensing requirements
+- A browser-based portfolio demonstration
+- Additional datasets for broader business analysis
 
----
+These items are potential extensions, not claims about features already implemented.
 
-# Portfolio Value
+## Portfolio Relevance
 
-This project demonstrates practical experience across the complete analytics lifecycle:
+This project demonstrates practical work across the analytics lifecycle:
 
 ```text
-Database
-   ↓
-SQL
-   ↓
-Python
-   ↓
-Data Cleaning
-   ↓
+SQL Server
+    ↓
+SQL & Data Extraction
+    ↓
+Python Data Cleaning
+    ↓
 Feature Engineering
-   ↓
-Business Analysis
-   ↓
+    ↓
+Exploratory Analysis
+    ↓
 Excel Reporting
-   ↓
-Power BI
-   ↓
+    ↓
+Power BI & DAX
+    ↓
 Data Validation
-   ↓
+    ↓
 Business Insights
 ```
 
-The project is designed as a portfolio example for roles such as:
+Relevant roles include:
 
-* Junior Data Analyst
-* Data Analyst
-* BI Analyst
-* Reporting Analyst
-* Power BI Analyst
-* Business Intelligence Developer
+- Junior Data Analyst
+- Data Analyst
+- BI Analyst
+- Reporting Analyst
+- Power BI Analyst
+- Business Intelligence Developer
+
+## Author
+
+**Aram Mehraban**
+
+Data Analyst | Business Intelligence | SQL | Python | Power BI | Excel | GIS
+
+GitHub: https://github.com/AramMehraban
+
+LinkedIn: https://www.linkedin.com/in/arammehraban/
 
 ---
 
-# Author
-
-## Aram Mehraban
-
-**Data Analyst | BI & Reporting | Python | SQL | Power BI | Excel**
-
-This project is part of my Data Analytics and Business Intelligence portfolio.
-
----
-
-# License
-
-This project is licensed under the MIT License.
+*This repository is a portfolio project demonstrating data extraction, data quality validation, analytics, reporting, and business intelligence development.*

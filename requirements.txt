@@ -1,11 +1,9 @@
-pandas
+﻿pandas
 numpy
 matplotlib
 seaborn
-sqlalchemy
-pyodbc
-jupyter
-xlsxwriter
+plotly
+streamlit
 openpyxl
-scikit-learn
+pyodbc
 python-dotenv
