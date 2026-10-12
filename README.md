@@ -1,10 +1,32 @@
 # AdventureWorks Sales & Profitability Analytics
 
-An end-to-end **Business Intelligence and Data Analytics portfolio project** using Microsoft SQL Server, Python, Excel, and Power BI.
+**End-to-End Business Intelligence & Data Analytics Portfolio Project**
 
-This project demonstrates a complete analytics workflow, from extracting transactional data and validating data quality to engineering analytical features, generating business reports, building interactive dashboards, and communicating actionable business insights.
+[![Open Interactive Streamlit Dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+
+**[Launch the Live Interactive Dashboard](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)** · **[View the GitHub Repository](https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics)**
+
+This project demonstrates an end-to-end analytics workflow using Microsoft SQL Server, Python, Excel, Power BI, and Streamlit. It covers data extraction, data quality validation, feature engineering, exploratory analysis, KPI development, interactive dashboards, automated reporting, and actionable business insights.
 
 The analysis focuses on sales performance, profitability, product categories, customer behavior, geographical performance, and management reporting.
+
+## Live Interactive Dashboard
+
+**Explore the browser-based dashboard without installing Python or Power BI Desktop.**
+
+[**Open AdventureWorks Sales & Profitability Analytics →**](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+
+The Streamlit application provides an online portfolio demonstration of the project's analytical results.
+
+Key capabilities include:
+- Interactive business KPI overview
+- Sales and profitability analysis
+- Product and category performance
+- Country and geographical comparisons
+- Interactive charts and filters
+- Data-driven business insights
+
+The online application is a portfolio presentation of the analytical project. It is separate from a live operational reporting system.
 
 ## Project Highlights
 
@@ -16,8 +38,15 @@ The analysis focuses on sales performance, profitability, product categories, cu
 - DAX measures, date modeling, and time intelligence
 - Customer revenue concentration and product performance segmentation
 - Cross-checking of core Power BI KPIs against validated analytical results
+- Browser-based dashboard demonstration using Streamlit and Plotly
 
 ## Dashboard
+
+### Streamlit Dashboard
+
+**Live demo:** [Open the interactive dashboard](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+
+### Power BI Report
 
 The Power BI report contains five main business pages and a dedicated internal QA page.
 
@@ -30,7 +59,9 @@ The Power BI report contains five main business pages and a dedicated internal Q
 | **Management Insights** | Business findings, revenue drivers, profitability, and management recommendations |
 | **QA** | Internal KPI, data quality, and profit validation checks |
 
-**Power BI report:** Open the local report at `powerbi/AdventureworksDashboard.pbix`. A published report link can be added here after deployment.
+**Power BI report file:** `powerbi/AdventureworksDashboard.pbix`
+
+Open the file using Power BI Desktop. A separate Power BI Service link can be added if the report is published online.
 
 ## Technology Stack
 
@@ -39,8 +70,9 @@ The Power BI report contains five main business pages and a dedicated internal Q
 | Database | Microsoft SQL Server |
 | Querying | SQL, joins, analytical queries, database views |
 | Data processing | Python, Pandas, NumPy |
-| Visualization | Matplotlib, Seaborn |
+| Visualization | Matplotlib, Seaborn, Plotly |
 | Business Intelligence | Power BI, DAX, Power Query |
+| Interactive web dashboard | Streamlit |
 | Reporting | Microsoft Excel, OpenPyXL, XlsxWriter |
 | Database connectivity | SQLAlchemy, pyodbc |
 | Development | Jupyter Notebook, VS Code, Git, GitHub |
@@ -98,6 +130,11 @@ SQL Server: AdventureWorksDW2025
           |
           v
   Business Recommendations
+
+          |
+          v
+  Streamlit Web Dashboard
+  Online Portfolio Demonstration
 ```
 
 ## Dataset Overview
@@ -437,6 +474,8 @@ The dedicated Power BI QA page displays the core KPI results and data quality ch
 ```text
 AdventureWorksDW-Analysis_PowerBI_Excel/
 │
+├── app.py
+├── requirements.txt
 ├── data/
 │   ├── raw/
 │   │   └── sales_data.csv
@@ -457,15 +496,13 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 │
 ├── powerbi/
 │   ├── AdventureworksDashboard.pbix
-│   └── Dashboards_Screenshots/
+│   └── Dashboards_Screenshot/
 │
 ├── reports/
 │   ├── charts/
 │   ├── screenshots/
 │   ├── analysis/
-│   ├── AdventureWorks_Analytics_Report.xlsx
-│   ├── business_reports.pdf
-│   └── business_reports.odt
+│   └── AdventureWorks_Analytics_Report.xlsx
 │
 ├── scripts/
 │   ├── 01_data_extraction.py
@@ -482,11 +519,10 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 │
 ├── .env.example
 ├── .gitignore
-├── requirements.txt
 └── README.md
 ```
 
-*The repository structure above documents the main project components. Keep the directory listing synchronized with the files actually committed to GitHub.*
+*The directory listing describes the intended project structure. Actual files may vary depending on which generated reports and datasets are committed to the repository.*
 
 ## Getting Started
 
@@ -501,15 +537,15 @@ AdventureWorksDW-Analysis_PowerBI_Excel/
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd AdventureWorksDW-Analysis_PowerBI_Excel
+git clone https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics.git
+cd AdventureWorks-Sales-Profitability-Analytics
 ```
 
 ### 2. Create a Virtual Environment
 
 **Windows:**
 
-```bash
+```powershell
 python -m venv venv
 venv\Scripts\activate
 ```
@@ -562,7 +598,19 @@ python scripts/06_export_excel.py
 
 The extraction step requires access to a configured SQL Server instance and the source database.
 
-### 6. Open the Power BI Report
+### 6. Run the Streamlit Dashboard Locally
+
+From the project root:
+
+```bash
+python -m streamlit run app.py
+```
+
+The dashboard will open in your browser. Its online version is available here:
+
+[**Live Streamlit Dashboard**](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+
+### 7. Open the Power BI Report
 
 Open:
 
@@ -579,6 +627,7 @@ If the repository is moved to another computer, update the Power BI data source 
 - Automated data visualizations
 - Excel reporting workbook
 - Interactive Power BI dashboard
+- Browser-based Streamlit dashboard
 - Data quality validation and business recommendations
 
 ## Limitations and Future Improvements
@@ -590,7 +639,6 @@ Potential future enhancements include:
 - Dedicated customer and product dimension tables
 - Additional drill-through and report tooltip functionality
 - Power BI Service deployment, subject to account and licensing requirements
-- A browser-based portfolio demonstration
 - Additional datasets for broader business analysis
 
 These items are potential extensions, not claims about features already implemented.
@@ -616,6 +664,8 @@ Power BI & DAX
     ↓
 Data Validation
     ↓
+Streamlit Web Dashboard
+    ↓
 Business Insights
 ```
 
@@ -634,9 +684,9 @@ Relevant roles include:
 
 Data Analyst | Business Intelligence | SQL | Python | Power BI | Excel | GIS
 
-GitHub: https://github.com/AramMehraban
-
-LinkedIn: https://www.linkedin.com/in/arammehraban/
+- **GitHub:** [AramMehraban](https://github.com/AramMehraban)
+- **LinkedIn:** [Aram Mehraban](https://www.linkedin.com/in/arammehraban/)
+- **Live Dashboard:** [AdventureWorks Sales & Profitability Analytics](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
 
 ---
 
