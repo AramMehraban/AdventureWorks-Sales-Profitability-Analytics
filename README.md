@@ -691,3 +691,17 @@ Data Analyst | Business Intelligence | SQL | Python | Power BI | Excel | GIS
 ---
 
 *This repository is a portfolio project demonstrating data extraction, data quality validation, analytics, reporting, and business intelligence development.*
+
+---
+
+## License & Copyright
+
+**Copyright © 2026 Aram Mehraban. All rights reserved.**
+
+This project, including its original source code, scripts, documentation, project structure, and visualizations, is the intellectual property of Aram Mehraban, unless otherwise stated.
+
+You may view this repository for personal learning, evaluation, and portfolio review. Copying, reproducing, modifying, redistributing, republishing, or commercially using the original materials without prior written permission is not permitted, except as permitted by applicable law.
+
+Third-party libraries, datasets, and other materials remain subject to their respective licenses and terms of use.
+
+**No license to reuse the original materials is granted by making this repository publicly available.**
