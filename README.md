@@ -2,7 +2,7 @@
 
 **End-to-End Business Intelligence & Data Analytics Portfolio Project**
 
-[![Open Interactive Streamlit Dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://adventureworks-sales-analytics.streamlit.app/)
+[![Open Interactive Streamlit Dashboard](https://adventureworks-sales-analytics.streamlit.app/)
 
 **[Launch the Live Interactive Dashboard](https://adventureworks-sales-analytics.streamlit.app/)** · **[View the GitHub Repository](https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics)**
 
