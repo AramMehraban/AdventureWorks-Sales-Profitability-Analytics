@@ -2,8 +2,6 @@
 
 **End-to-End Business Intelligence & Data Analytics Portfolio Project**
 
-[![Open Interactive Streamlit Dashboard]](https://adventureworks-sales-analytics.streamlit.app/)
-
 **[Launch the Live Interactive Dashboard](https://adventureworks-sales-analytics.streamlit.app/)** · **[View the GitHub Repository](https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics)**
 
 This project demonstrates an end-to-end analytics workflow using Microsoft SQL Server, Python, Excel, Power BI, and Streamlit. It covers data extraction, data quality validation, feature engineering, exploratory analysis, KPI development, interactive dashboards, automated reporting, and actionable business insights.
