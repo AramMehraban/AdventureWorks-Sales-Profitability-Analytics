@@ -2,9 +2,9 @@
 
 **End-to-End Business Intelligence & Data Analytics Portfolio Project**
 
-[![Open Interactive Streamlit Dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+[![Open Interactive Streamlit Dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://adventureworks-sales-analytics.streamlit.app/)
 
-**[Launch the Live Interactive Dashboard](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)** · **[View the GitHub Repository](https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics)**
+**[Launch the Live Interactive Dashboard](https://adventureworks-sales-analytics.streamlit.app/)** · **[View the GitHub Repository](https://github.com/AramMehraban/AdventureWorks-Sales-Profitability-Analytics)**
 
 This project demonstrates an end-to-end analytics workflow using Microsoft SQL Server, Python, Excel, Power BI, and Streamlit. It covers data extraction, data quality validation, feature engineering, exploratory analysis, KPI development, interactive dashboards, automated reporting, and actionable business insights.
 
@@ -14,7 +14,7 @@ The analysis focuses on sales performance, profitability, product categories, cu
 
 **Explore the browser-based dashboard without installing Python or Power BI Desktop.**
 
-[**Open AdventureWorks Sales & Profitability Analytics →**](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+[**Open AdventureWorks Sales & Profitability Analytics →**](https://adventureworks-sales-analytics.streamlit.app/)
 
 The Streamlit application provides an online portfolio demonstration of the project's analytical results.
 
@@ -44,7 +44,7 @@ The online application is a portfolio presentation of the analytical project. It
 
 ### Streamlit Dashboard
 
-**Live demo:** [Open the interactive dashboard](https://adventureworks-sales-profitability-analytics-jjrjxwdkcbdlqkrxj.streamlit.app/)
+**Live demo:** [Open the interactive dashboard](https://adventureworks-sales-analytics.streamlit.app/)
 
 ### Power BI Report
 
